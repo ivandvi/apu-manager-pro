@@ -155,17 +155,10 @@
 </div>
 
 <form id="form-compra" class="mt-6 flex flex-col space-y-4">
-  <p class="text-sm text-gray-300 text-left">Prepara tu próximo proyecto de obra hoy. ¿Dónde deseas recibir tu clave de licencia?</p>
-  
-  <div class="flex flex-col space-y-2 pb-2 text-left">
-    <label for="metodo-entrega" class="text-sm text-gray-200">Método de entrega:</label>
-    <select id="metodo-entrega" class="w-full bg-gray-800 text-white border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:border-swift-cyan focus:ring-1 focus:ring-swift-cyan transition">
-      <option value="whatsapp">WhatsApp</option>
-      <option value="email">Correo Electrónico</option>
-    </select>
-  </div>
-  
-  <input type="text" id="email-contacto" placeholder="Tu número de WhatsApp o correo electrónico" required class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-3 px-4 focus:outline-none focus:border-swift-cyan focus:ring-1 focus:ring-swift-cyan transition placeholder-gray-500">
+  <p class="text-sm text-gray-300 text-left">Prepara tu próximo proyecto de obra hoy. Recibirás tu clave de licencia por correo electrónico después del pago.</p>
+
+  <label for="email-contacto" class="text-sm text-gray-200 text-left">Correo electrónico:</label>
+  <input type="email" id="email-contacto" placeholder="Tu correo electrónico" autocomplete="email" required class="w-full bg-gray-800 text-white border border-gray-700 rounded-md py-3 px-4 focus:outline-none focus:border-swift-cyan focus:ring-1 focus:ring-swift-cyan transition placeholder-gray-500">
   
   <button id="btn-compra" type="submit" class="w-full bg-swift-cyan-gradient text-white font-semibold py-3 px-6 rounded-full hover:opacity-90 transition duration-300 text-lg shadow-md mt-2">
     Comprar Licencia con PSE / Tarjeta
@@ -249,20 +242,8 @@
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form-compra');
     const inputContacto = document.getElementById('email-contacto');
-    const selectMetodo = document.getElementById('metodo-entrega');
     const btnCompra = document.getElementById('btn-compra');
     const divMensaje = document.getElementById('mensaje-resultado');
-
-    // Cambiar el placeholder dinámicamente según el método seleccionado
-    selectMetodo.addEventListener('change', (e) => {
-      if (e.target.value === 'whatsapp') {
-        inputContacto.type = 'tel';
-        inputContacto.placeholder = 'Tu número de WhatsApp';
-      } else {
-        inputContacto.type = 'email';
-        inputContacto.placeholder = 'Tu correo electrónico';
-      }
-    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -274,12 +255,11 @@
       divMensaje.textContent = ''; // Limpiar mensajes previos
 
       const contacto = inputContacto.value;
-      const metodo_entrega = selectMetodo.value;
       const referencia_pago = "TEST-" + Math.floor(Math.random() * 10000);
 
       const payload = {
         contacto: contacto,
-        metodo_entrega: metodo_entrega,
+        metodo_entrega: "email",
         referencia_pago: referencia_pago
       };
 
