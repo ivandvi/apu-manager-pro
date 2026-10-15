@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Radial Ambient Glow inside the circular disc -->
+    <radialGradient id="discGlow_sistemas" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00F5FF" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#0072FF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Linear Gradient for Emblem -->
+    <linearGradient id="emblemGrad_sistemas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="100%" stop-color="#0072FF"/>
+    </linearGradient>
+
+    <!-- Outer Rim Ring Gradient -->
+    <linearGradient id="rimGrad_sistemas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#0072FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00F5FF" stop-opacity="0.7"/>
+    </linearGradient>
+
+    <!-- Neon Glow Filter -->
+    <filter id="neonFilter_circle_sistemas" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Circular Clip Path -->
+    <clipPath id="circleClip">
+      <circle cx="512" cy="512" r="512"/>
+    </clipPath>
+  </defs>
+
+  <!-- Circular Disc Base (fits cleanly into square canvas and circular crop) -->
+  <g clip-path="url(#circleClip)">
+    <rect width="1024" height="1024" fill="#09090B"/>
+    <circle cx="512" cy="512" r="512" fill="url(#discGlow_sistemas)"/>
+
+    <!-- Subtle Technical Background Grid & Concentric Rings -->
+    <circle cx="512" cy="512" r="480" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2"/>
+    <circle cx="512" cy="512" r="420" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1.5"/>
+
+    <!-- Outer High-Tech Glowing Rim -->
+    <circle cx="512" cy="512" r="488" fill="none" stroke="url(#rimGrad_sistemas)" stroke-width="8" opacity="0.9"/>
+    <circle cx="512" cy="512" r="476" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+
+    <!-- ISOTIPO BIVAD CENTRADO (Escala óptima para visualización a 32px - 1024px) -->
+    <!-- Dimensiones originales del isotipo: ~200px ancho x 160px alto. Escalado a ~2.4x y centrado -->
+    <g transform="translate(265, 320) scale(2.4)">
+      <!-- Capa de Resplandor Neón -->
+      <g filter="url(#neonFilter_circle_sistemas)" opacity="0.55">
+        <rect x="15" y="8" width="18" height="144" rx="4" fill="#00F5FF"/>
+        <path d="M 36 8 L 84 8 C 110 8 128 24 128 44 C 128 64 110 76 84 78 L 36 78 Z" fill="#00F5FF"/>
+        <path d="M 36 82 L 88 82 C 115 82 132 98 132 120 C 132 142 112 152 84 152 L 36 152 Z" fill="#0072FF"/>
+      </g>
+
+      <!-- Columna Principal -->
+      <rect x="15" y="8" width="18" height="144" rx="4" fill="#00F5FF"/>
+
+      <!-- Lóbulo Superior B -->
+      <path d="M 36 8 L 84 8 C 110 8 128 24 128 44 C 128 64 110 76 84 78 L 36 78 Z" fill="#00F5FF"/>
+      <path d="M 36 24 L 78 24 C 92 24 104 33 104 44 C 104 55 92 62 78 62 L 36 62 Z" fill="#09090B"/>
+
+      <!-- Lóbulo Inferior B -->
+      <path d="M 36 82 L 88 82 C 115 82 132 98 132 120 C 132 142 112 152 84 152 L 36 152 Z" fill="#0072FF"/>
+      <path d="M 36 98 L 80 98 C 94 98 108 106 108 120 C 108 132 94 136 80 136 L 36 136 Z" fill="#09090B"/>
+
+      <!-- Chevrons Direccionales de Aceleración -->
+      <path d="M 145 46 L 163 70 L 145 94 L 157 94 L 175 70 L 157 46 Z" fill="#00F5FF"/>
+      <path d="M 166 46 L 184 70 L 166 94 L 178 94 L 196 70 L 178 46 Z" fill="#0072FF" opacity="0.85"/>
+    </g>
+  </g>
+</svg>

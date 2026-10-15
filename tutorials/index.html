@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Academia de tutoriales oficiales en video para APU Manager PRO y el software de ingeniería de Bivad Sistemas. Aprende a crear presupuestos, APUs y respaldos."/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="theme-color" content="#111827"/>
+  <title>Academia y Tutoriales en Video | Bivad Sistemas</title>
+  <link rel="icon" type="image/svg+xml" href="bivad_profile_circle.svg">
+  <link rel="alternate icon" href="bivad_profile_circle.png">
+
+  <!-- Tailwind CSS Local Output & CDN Fallback -->
+  <link href="../output.css" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.youtube.com/iframe_api" defer></script>
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #0B1120;
+    }
+    .text-swift-cyan {
+      color: #00CFE8;
+    }
+    .bg-swift-cyan {
+      background-color: #00CFE8;
+    }
+    .bg-swift-cyan-gradient {
+      background: linear-gradient(90deg, #00CFE8 0%, #009FE3 100%);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 20px rgba(0, 207, 232, 0.35);
+    }
+    .glow-cyan-border {
+      border: 1px solid rgba(0, 207, 232, 0.3);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #111827;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #00CFE8;
+    }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <header class="bg-gray-900/90 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="../" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition duration-200">
+          <img src="bivad_profile_circle.svg" alt="Bivad Sistemas" width="40" height="40" style="width: 40px; height: 40px; max-width: 40px; max-height: 40px;" class="w-10 h-10 object-contain rounded-full">
+        </div>
+        <div>
+          <span class="text-lg font-bold text-white tracking-tight flex items-center gap-1.5">
+            Bivad Sistemas
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Tutoriales</span>
+          </span>
+          <span class="text-xs text-gray-400 block -mt-0.5">Centro Oficial de Aprendizaje</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-sm">
+        <a href="../" class="text-gray-300 hover:text-cyan-400 font-medium transition">Inicio</a>
+        <a href="../#caracteristicas" class="text-gray-300 hover:text-cyan-400 font-medium transition">Características</a>
+        <a href="../#precios" class="text-gray-300 hover:text-cyan-400 font-medium transition">Precios</a>
+        <a href="../#descargar-github" class="bg-swift-cyan-gradient text-gray-950 font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition shadow-sm">
+          Descargar Software
+        </a>
+      </nav>
+
+      <!-- Mobile Return Button -->
+      <div class="md:hidden">
+        <a href="../" class="text-xs bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-700">
+          ← Volver
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO HEADER ================= -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-gray-900 to-[#0B1120] py-12 border-b border-gray-800/80">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,207,232,0.08),transparent_50%)]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-medium mb-4">
+          <svg class="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+          </svg>
+          Videotutoriales Paso a Paso • Canal Oficial de YouTube
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          Domina <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">APU Manager PRO</span> en Minutos
+        </h1>
+        <p class="mt-3 text-base sm:text-lg text-gray-300 leading-relaxed">
+          Guías oficiales en video, sin rodeos y 100% prácticas. Aprende a estructurar tus presupuestos, personalizar reportes corporativos y salvaguardar tus proyectos con total autonomía.
+        </p>
+      </div>
+
+      <!-- Quick Search / Filter Bar -->
+      <div class="mt-8 max-w-xl">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar tema: branding, excel, aiú, backup, plantillas..." 
+            class="w-full bg-gray-900/90 text-white pl-11 pr-4 py-3 rounded-xl border border-gray-700/80 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 text-sm outline-none transition shadow-inner placeholder-gray-500"
+          />
+          <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN ACADEMY CONTENT ================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- ================= COL 1: MENÚ DE APLICACIONES (ESCALABLE) ================= -->
+      <aside class="lg:col-span-3 space-y-6">
+        <div class="bg-gray-900/70 border border-gray-800 rounded-2xl p-5 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400">Software & Catálogos</h2>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-gray-800 text-cyan-400 font-mono font-medium">Bivad Apps</span>
+          </div>
+
+          <!-- List of Applications -->
+          <div class="space-y-2" id="appsMenu">
+            
+            <!-- APU Manager PRO (Active) -->
+            <button 
+              type="button"
+              onclick="selectApp('apu-manager-pro')"
+              id="appBtn-apu"
+              class="w-full text-left flex items-start gap-3 p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/40 text-white shadow-md transition group"
+            >
+              <div class="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center p-1 shrink-0 border border-cyan-500/30">
+                <img src="../app_icon.ico" alt="APU Manager PRO" width="28" height="28" style="width: 28px; height: 28px; max-width: 28px; max-height: 28px;" class="w-7 h-7 object-contain">
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-semibold text-sm text-cyan-200 group-hover:text-white truncate">APU Manager PRO</span>
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                </div>
+                <p class="text-xs text-gray-400 truncate">Presupuestos de Obra Civil</p>
+                <div class="mt-1 flex items-center gap-2 text-[11px] text-cyan-400 font-medium">
+                  <span>6 Videos</span> • <span>Serie Completa</span>
+                </div>
+              </div>
+            </button>
+
+            <!-- App 2 Placeholder (En desarrollo) -->
+            <div class="w-full text-left flex items-start gap-3 p-3 rounded-xl bg-gray-900/40 border border-gray-800/80 text-gray-400 opacity-60 cursor-not-allowed">
+              <div class="w-9 h-9 rounded-lg bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-sm shrink-0 border border-gray-700">
+                📦
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-sm truncate">Almacén & Compras</span>
+                  <span class="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.2 rounded font-mono">Próximamente</span>
+                </div>
+                <p class="text-xs text-gray-500 truncate">Kardex y pedidos de obra</p>
+              </div>
+            </div>
+
+            <!-- App 3 Placeholder (Planeación) -->
+            <div class="w-full text-left flex items-start gap-3 p-3 rounded-xl bg-gray-900/40 border border-gray-800/80 text-gray-400 opacity-60 cursor-not-allowed">
+              <div class="w-9 h-9 rounded-lg bg-gray-800 text-gray-400 flex items-center justify-center font-bold text-sm shrink-0 border border-gray-700">
+                📅
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-sm truncate">Cronograma CPM</span>
+                  <span class="text-[9px] bg-gray-800 text-gray-400 border border-gray-700 px-1.5 py-0.2 rounded font-mono">En Desarrollo</span>
+                </div>
+                <p class="text-xs text-gray-500 truncate">Ruta crítica y diagramas Gantt</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- YouTube Official Channel Callout -->
+          <div class="mt-6 pt-5 border-t border-gray-800/80">
+            <a 
+              href="https://youtube.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full flex items-center justify-center gap-2 bg-red-600/10 hover:bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-semibold py-2.5 px-3 rounded-xl transition duration-200"
+            >
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Canal Oficial de Bivad Sistemas
+            </a>
+            <p class="text-[11px] text-gray-500 text-center mt-2 leading-tight">
+              Suscríbete para recibir notificaciones de nuevas plantillas y actualizaciones.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Help / Contact Box -->
+        <div class="bg-gray-900/40 border border-gray-800/80 rounded-2xl p-5 text-center">
+          <span class="text-2xl mb-1 block">💼</span>
+          <h4 class="text-sm font-semibold text-white">¿Dudas Comerciales o Licencias?</h4>
+          <p class="text-xs text-gray-400 mt-1">Escríbenos directamente para adquisiciones corporativas o facturación.</p>
+          <a href="mailto:contacto@bivadsistemas.com" class="inline-block mt-3 text-xs font-semibold text-cyan-400 hover:text-cyan-300 hover:underline">
+            contacto@bivadsistemas.com →
+          </a>
+        </div>
+      </aside>
+
+      <!-- ================= COL 2: REPRODUCTOR DESTACADO & LISTA DE VIDEOS ================= -->
+      <section class="lg:col-span-9 space-y-8">
+
+        <!-- Active Video Player Frame -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+          <!-- 16:9 Video Container -->
+          <div class="relative w-full aspect-video bg-black flex items-center justify-center group">
+            
+            <!-- Dynamic Iframe or Interactive Placeholder -->
+            <iframe 
+              id="mainVideoPlayer" 
+              class="w-full h-full object-cover hidden" 
+              src="" 
+              title="Reproductor de Video Tutorial | APU Manager PRO" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+
+            <!-- Fallback / Preview Card before actual video ID is pasted -->
+            <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900">
+              <div class="w-16 h-16 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4 border border-cyan-500/40 shadow-xl group-hover:scale-110 transition duration-300">
+                <svg class="w-8 h-8 fill-current translate-x-0.5" viewBox="0 0 20 20">
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                </svg>
+              </div>
+              <span id="playerBadge" class="text-xs uppercase font-bold tracking-wider text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500/30 mb-2">
+                Módulo 1 de 6
+              </span>
+              <h3 id="playerTitle" class="text-xl sm:text-2xl font-bold text-white max-w-xl">
+                Primeros Pasos, Instalación y Configuración de Marca (Branding)
+              </h3>
+              <p id="playerSubtitle" class="text-sm text-gray-400 mt-2 max-w-lg">
+                Aprende a instalar la aplicación en Windows, aceptar los términos de licencia y configurar el membrete de tu empresa.
+              </p>
+              <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <button 
+                  type="button" 
+                  id="btnOpenInYouTube"
+                  onclick="openCurrentInYouTube()"
+                  class="bg-swift-cyan-gradient text-gray-950 font-bold px-5 py-2.5 rounded-lg text-xs hover:opacity-90 transition flex items-center gap-2 shadow-lg"
+                >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  Ver en YouTube
+                </button>
+                <button 
+                  type="button"
+                  onclick="nextVideo()"
+                  class="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold px-4 py-2.5 rounded-lg text-xs border border-gray-700 transition"
+                >
+                  Siguiente Lección →
+                </button>
+              </div>
+            </div>
+
+            <!-- Next Video Overlay Card (Aparece automáticamente al terminar de reproducir) -->
+            <div id="nextVideoOverlay" class="absolute inset-0 bg-gray-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20 hidden transition-all duration-300">
+              <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3 border border-emerald-500/40 shadow-xl">
+                <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <span class="text-xs uppercase font-bold tracking-wider text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30 mb-2">
+                ¡Lección Completada!
+              </span>
+              <h3 id="nextOverlayTitle" class="text-lg sm:text-xl font-bold text-white max-w-lg mt-1">
+                Siguiente: Video 2 — Gestión del Catálogo Maestro
+              </h3>
+              <p id="nextOverlayCountdown" class="text-xs text-gray-300 mt-2">
+                Reproduciendo automáticamente en <span id="countdownSecs" class="text-cyan-400 font-bold text-sm">5</span> segundos...
+              </p>
+              <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <button id="btnPlayNextNow" type="button" class="bg-swift-cyan-gradient text-gray-950 font-bold px-6 py-2.5 rounded-xl text-xs hover:opacity-95 transition shadow-lg glow-cyan flex items-center gap-2">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                  <span>Reproducir Siguiente Video</span>
+                </button>
+                <button id="btnReplayCurrent" type="button" class="bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold px-4 py-2.5 rounded-xl text-xs border border-gray-700 transition flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span>Repetir Lección</span>
+                </button>
+                <button id="btnCancelNext" type="button" class="text-xs text-gray-400 hover:text-white px-3 py-2 transition">
+                  Cerrar
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Video Details Accordion/Panel -->
+          <div class="p-6 bg-gray-900/90 border-t border-gray-800">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span class="text-xs text-gray-400 font-mono">APU Manager PRO • Guía de Ingeniería</span>
+                <h4 id="activeLessonHeading" class="text-lg font-bold text-white">Lección Seleccionada</h4>
+              </div>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button id="btnPrevLesson" type="button" class="bg-gray-800 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed text-gray-300 px-3 py-1.5 rounded-lg text-xs font-semibold border border-gray-700 transition flex items-center gap-1">
+                  <span>← Anterior</span>
+                </button>
+                <button id="btnNextLesson" type="button" class="bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 px-3.5 py-1.5 rounded-lg text-xs font-semibold border border-cyan-500/30 transition flex items-center gap-1">
+                  <span>Siguiente Lección →</span>
+                </button>
+                <span id="activeDuration" class="text-xs text-gray-400 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
+                  ⏱ Duración: ~4 min
+                </span>
+                <span class="text-xs text-emerald-400 bg-emerald-950/60 px-3 py-1.5 rounded-full border border-emerald-500/30">
+                  ✓ Acceso Gratuito
+                </span>
+              </div>
+            </div>
+            
+            <div class="mt-4 pt-4 border-t border-gray-800/80">
+              <h5 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Lo que aprenderás en esta lección:</h5>
+              <ul id="activeKeyPoints" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-300">
+                <!-- Dynamically loaded points -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= LISTADO DE LOS 6 VIDEOS SUGERIDOS ================= -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+              <span>📚 Módulos del Curso Oficial</span>
+              <span class="text-xs font-normal text-gray-400 bg-gray-800 px-2 py-0.5 rounded">6 Lecciones</span>
+            </h3>
+            <span class="text-xs text-cyan-400">Haz clic en cualquier lección para reproducirla</span>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3.5" id="lessonsContainer">
+            <!-- Cards will be populated by JavaScript -->
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- ================= BOTTOM CONVERSION BANNER ================= -->
+    <section class="mt-16 bg-gradient-to-r from-gray-900 via-cyan-950/40 to-gray-900 border border-cyan-500/30 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,207,232,0.1),transparent_70%)]"></div>
+      <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950 px-3 py-1 rounded-full border border-cyan-500/40">
+          Software de Escritorio para Colombia y Latinoamérica
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+          ¿Aún no tienes APU Manager PRO en tu equipo?
+        </h3>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          Descarga la prueba gratuita de 14 días o adquiere tu licencia comercial perpetua por solo 
+          <span class="font-bold text-cyan-300">$99.000 COP</span> (pago único de por vida, sin mensualidades).
+        </p>
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
+          <a 
+            href="../#descargar-github" 
+            class="bg-swift-cyan-gradient text-gray-950 font-bold px-6 py-3 rounded-xl hover:opacity-95 transition shadow-lg glow-cyan text-sm"
+          >
+            Descargar Prueba Gratuita (14 Días)
+          </a>
+          <a 
+            href="../#precios" 
+            class="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-xl border border-gray-700 transition text-sm"
+          >
+            Comprar Licencia Comercial
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-950 border-t border-gray-900 py-10 text-xs text-gray-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-gray-300">Bivad Sistemas</span> • © 2026 Todos los derechos reservados.
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="../" class="hover:text-cyan-400 transition">Página Principal</a>
+        <a href="../#precios" class="hover:text-cyan-400 transition">Licenciamiento</a>
+        <a href="mailto:contacto@bivadsistemas.com" class="hover:text-cyan-400 transition">Atención Comercial</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT: DATA & INTERACTIVIDAD ================= -->
+  <script>
+    // -------------------------------------------------------------
+    // CATÁLOGO DE LECCIONES EN VIDEO PARA APU MANAGER PRO
+    // -------------------------------------------------------------
+    const LESSONS = [
+      {
+        id: 1,
+        number: "Video 1",
+        title: "Primeros Pasos, Instalación y Configuración de Marca (Branding)",
+        shortDesc: "Aprende a instalar la aplicación en Windows, aceptar los términos de licencia y configurar el nombre de tu empresa, NIT y logotipo para reportes.",
+        duration: "3:30 min",
+        youtubeUrl: "https://youtu.be/U35eQR_I4_0",
+        youtubeEmbedId: "U35eQR_I4_0",
+        keyPoints: [
+          "Descarga e instalación limpia en Windows",
+          "Aceptación del Contrato de Licencia (EULA)",
+          "Configuración del logotipo oficial de tu empresa",
+          "Datos fiscales (NIT, Dirección, Contacto) en reportes"
+        ]
+      },
+      {
+        id: 2,
+        number: "Video 2",
+        title: "Gestión del Catálogo Maestro de Insumos y Precios",
+        shortDesc: "Cómo administrar las 4 familias de insumos (Materiales, Mano de Obra, Equipos, Transporte), actualizar tarifas e importar masivamente desde Excel.",
+        duration: "6:40 min",
+        youtubeUrl: "https://youtu.be/idUQ5LEpnsE",
+        youtubeEmbedId: "idUQ5LEpnsE",
+        keyPoints: [
+          "Búsqueda y filtrado rápido por familia",
+          "Ajuste de rendimientos y cuadrillas",
+          "Importación de listas de precios desde Excel",
+          "Exportación del catálogo para revisión"
+        ]
+      },
+      {
+        id: 3,
+        number: "Video 3",
+        title: "Creación de APUs y Uso de Plantillas Maestras",
+        shortDesc: "Crea ítems desde cero o ahorra horas utilizando las más de 200 plantillas preconfiguradas de obra civil, redes eléctricas e hidrosanitarias.",
+        duration: "11:40 min",
+        youtubeUrl: "https://youtu.be/hXvWh3tyl2c",
+        youtubeEmbedId: "hXvWh3tyl2c",
+        keyPoints: [
+          "Creación de ítems de obra en blanco",
+          "Cálculo de costos directos en tiempo real",
+          "Importación desde Plantillas Maestras",
+          "Duplicación y adaptación rápida de ítems"
+        ]
+      },
+      {
+        id: 4,
+        number: "Video 4",
+        title: "Estructuración de Presupuestos Maestros de Construcción",
+        shortDesc: "Aprende a crear proyectos consolidados, organizar por capítulos, asignar cantidades de alcance y parametrizar porcentajes de AIU e IVA.",
+        duration: "8:20 min",
+        youtubeUrl: "https://www.youtube.com",
+        youtubeEmbedId: "",
+        keyPoints: [
+          "Creación de proyectos y vinculación de APUs",
+          "Organización jerárquica por Capítulos de obra",
+          "Cálculo automático de AIU (Admin, Imprevistos, Utilidad)",
+          "Aritmética Decimal de alta precisión sin desajustes"
+        ]
+      },
+      {
+        id: 5,
+        number: "Video 5",
+        title: "Exportación Ejecutiva a PDF Oficial y Hojas Excel",
+        shortDesc: "Generación de propuestas oficiales imprimibles de alto impacto visual con membrete de tu empresa y hojas tabulares para licitación pública o privada.",
+        duration: "5:10 min",
+        youtubeUrl: "https://www.youtube.com",
+        youtubeEmbedId: "",
+        keyPoints: [
+          "Reporte PDF ejecutivo con membrete y logo",
+          "Cuadro de resumen general y desglose de AIU",
+          "Exportación a Excel editable para entidades contratantes",
+          "Garantía de integridad de totales"
+        ]
+      },
+      {
+        id: 6,
+        number: "Video 6",
+        title: "Seguridad de Datos: Creación y Restauración de Copias de Seguridad",
+        shortDesc: "Conoce dónde se almacena tu base de datos local (.db), cómo generar respaldos periódicos con fecha y hora, y cómo restaurar tu información ante cualquier desastre.",
+        duration: "4:00 min",
+        youtubeUrl: "https://www.youtube.com",
+        youtubeEmbedId: "",
+        keyPoints: [
+          "Ubicación de tu base de datos SQLite offline",
+          "Uso de 'Crear Copia de Seguridad' desde el menú Archivo",
+          "Almacenamiento seguro en discos externos o nube",
+          "Proceso de restauración y recuperación ante fallas de PC"
+        ]
+      }
+    ];
+
+    let currentLessonIndex = 0;
+
+    // Renderizar la lista de lecciones
+    function renderLessons(filterText = "") {
+      const container = document.getElementById("lessonsContainer");
+      container.innerHTML = "";
+
+      const filtered = LESSONS.filter(l => 
+        l.title.toLowerCase().includes(filterText.toLowerCase()) ||
+        l.shortDesc.toLowerCase().includes(filterText.toLowerCase()) ||
+        l.keyPoints.some(p => p.toLowerCase().includes(filterText.toLowerCase()))
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 bg-gray-900/50 rounded-2xl border border-gray-800">
+            <span class="text-3xl">🔍</span>
+            <p class="text-sm text-gray-400 mt-2">No se encontraron lecciones con "${filterText}".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((lesson, idx) => {
+        const isSelected = lesson.id === LESSONS[currentLessonIndex].id;
+        const card = document.createElement("div");
+        card.className = `p-4 sm:p-5 rounded-2xl border cursor-pointer transition duration-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+          isSelected 
+            ? "bg-gradient-to-r from-gray-900 via-cyan-950/30 to-gray-900 border-cyan-500/50 shadow-lg glow-cyan-border" 
+            : "bg-gray-900/60 border-gray-800 hover:border-gray-700 hover:bg-gray-900"
+        }`;
+        card.onclick = () => selectLesson(lesson.id - 1);
+
+        card.innerHTML = `
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl ${isSelected ? 'bg-cyan-500 text-gray-950 font-black' : 'bg-gray-800 text-cyan-400'} flex items-center justify-center shrink-0 text-sm font-bold shadow-md">
+              ${lesson.id}
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">${lesson.number}</span>
+                <span class="text-xs text-gray-500">•</span>
+                <span class="text-xs text-gray-400">⏱ ${lesson.duration}</span>
+                <span class="text-xs text-gray-500">•</span>
+                ${lesson.youtubeEmbedId 
+                  ? '<span class="text-[10px] px-2 py-0.5 rounded font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">✓ Disponible</span>' 
+                  : '<span class="text-[10px] px-2 py-0.5 rounded font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/30">⏳ En Producción</span>'}
+              </div>
+              <h4 class="text-sm sm:text-base font-bold text-white mt-0.5">${lesson.title}</h4>
+              <p class="text-xs text-gray-400 mt-1 line-clamp-2">${lesson.shortDesc}</p>
+            </div>
+          </div>
+          <div class="shrink-0 self-end sm:self-center">
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg ${
+              isSelected ? 'bg-cyan-400 text-gray-950' : 'bg-gray-800 text-gray-300 hover:text-white'
+            }">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+              ${isSelected ? 'Reproduciendo' : (lesson.youtubeEmbedId ? 'Ver Video' : 'Próximamente')}
+            </span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    let ytPlayer = null;
+    let ytPlayerReady = false;
+    let countdownTimer = null;
+
+    // Inicializar YouTube IFrame Player API
+    window.onYouTubeIframeAPIReady = function() {
+      initYouTubePlayer();
+    };
+
+    function initYouTubePlayer() {
+      try {
+        if (window.YT && window.YT.Player) {
+          ytPlayer = new YT.Player('mainVideoPlayer', {
+            events: {
+              'onReady': () => { ytPlayerReady = true; },
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("YouTube API init fallback", e);
+      }
+    }
+
+    function onPlayerStateChange(event) {
+      // 0 = YT.PlayerState.ENDED
+      if (event.data === 0 || (window.YT && event.data === YT.PlayerState.ENDED)) {
+        triggerVideoEndedFlow();
+      }
+    }
+
+    // Doble respaldo: Escuchar mensajes HTML5 postMessage de YouTube para detectar fin del video
+    window.addEventListener('message', (e) => {
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        if (data) {
+          if (data.event === 'onStateChange' && data.info === 0) {
+            triggerVideoEndedFlow();
+          } else if (data.info && data.info.playerState === 0) {
+            triggerVideoEndedFlow();
+          }
+        }
+      } catch (err) {}
+    });
+
+    function triggerVideoEndedFlow() {
+      const nextIndex = currentLessonIndex + 1;
+      const overlay = document.getElementById("nextVideoOverlay");
+      const titleEl = document.getElementById("nextOverlayTitle");
+      const countdownEl = document.getElementById("nextOverlayCountdown");
+      const btnPlayNext = document.getElementById("btnPlayNextNow");
+      const secsSpan = document.getElementById("countdownSecs");
+
+      clearInterval(countdownTimer);
+
+      if (nextIndex < LESSONS.length) {
+        const nextLesson = LESSONS[nextIndex];
+        titleEl.textContent = `Siguiente: ${nextLesson.number} — ${nextLesson.title}`;
+        overlay.classList.remove("hidden");
+
+        if (nextLesson.youtubeEmbedId) {
+          countdownEl.classList.remove("hidden");
+          btnPlayNext.classList.remove("hidden");
+          let remaining = 5;
+          secsSpan.textContent = String(remaining);
+
+          countdownTimer = setInterval(() => {
+            remaining--;
+            if (remaining > 0) {
+              secsSpan.textContent = String(remaining);
+            } else {
+              clearInterval(countdownTimer);
+              overlay.classList.add("hidden");
+              selectLesson(nextIndex);
+            }
+          }, 1000);
+        } else {
+          countdownEl.textContent = "El siguiente módulo se encuentra en producción y estará disponible muy pronto.";
+          btnPlayNext.classList.add("hidden");
+        }
+      } else {
+        titleEl.textContent = "¡Has completado todas las lecciones del curso oficial!";
+        countdownEl.textContent = "Ahora tienes las bases completas para presupuestar tus obras con APU Manager PRO.";
+        btnPlayNext.classList.add("hidden");
+        overlay.classList.remove("hidden");
+      }
+    }
+
+    // Seleccionar y cargar una lección en el reproductor principal
+    function selectLesson(index) {
+      clearInterval(countdownTimer);
+      const overlay = document.getElementById("nextVideoOverlay");
+      if (overlay) overlay.classList.add("hidden");
+
+      currentLessonIndex = index;
+      const lesson = LESSONS[currentLessonIndex];
+
+      document.getElementById("playerBadge").innerText = `Módulo ${lesson.id} de ${LESSONS.length}`;
+      document.getElementById("playerTitle").innerText = lesson.title;
+      document.getElementById("playerSubtitle").innerText = lesson.shortDesc;
+      document.getElementById("activeLessonHeading").innerText = `${lesson.number}: ${lesson.title}`;
+      document.getElementById("activeDuration").innerText = `⏱ Duración: ${lesson.duration}`;
+
+      // Actualizar estado de botones Anterior / Siguiente
+      const btnPrev = document.getElementById("btnPrevLesson");
+      const btnNext = document.getElementById("btnNextLesson");
+      if (btnPrev) btnPrev.disabled = (currentLessonIndex === 0);
+      if (btnNext) btnNext.disabled = (currentLessonIndex === LESSONS.length - 1);
+
+      // Renderizar viñetas de aprendizaje
+      const pointsContainer = document.getElementById("activeKeyPoints");
+      pointsContainer.innerHTML = "";
+      lesson.keyPoints.forEach(p => {
+        const li = document.createElement("li");
+        li.className = "flex items-center gap-2";
+        li.innerHTML = `<span class="text-cyan-400 font-bold">✓</span> <span>${p}</span>`;
+        pointsContainer.appendChild(li);
+      });
+
+      // Manejar Iframe de YouTube si tiene Embed ID
+      const iframe = document.getElementById("mainVideoPlayer");
+      const placeholder = document.getElementById("videoPlaceholder");
+      const btnYt = document.getElementById("btnOpenInYouTube");
+
+      if (lesson.youtubeEmbedId) {
+        iframe.src = `https://www.youtube-nocookie.com/embed/${lesson.youtubeEmbedId}?autoplay=1&rel=0&enablejsapi=1`;
+        iframe.classList.remove("hidden");
+        placeholder.classList.add("hidden");
+      } else {
+        iframe.src = "";
+        iframe.classList.add("hidden");
+        placeholder.classList.remove("hidden");
+        document.getElementById("playerBadge").innerText = `Módulo ${lesson.id} de ${LESSONS.length} • En Producción`;
+        if (btnYt) {
+          btnYt.classList.add("hidden");
+        }
+      }
+
+      renderLessons(document.getElementById("searchInput").value);
+    }
+
+    function prevVideo() {
+      if (currentLessonIndex > 0) {
+        selectLesson(currentLessonIndex - 1);
+      }
+    }
+
+    function nextVideo() {
+      if (currentLessonIndex < LESSONS.length - 1) {
+        selectLesson(currentLessonIndex + 1);
+      } else {
+        selectLesson(0);
+      }
+    }
+
+    function openCurrentInYouTube() {
+      const lesson = LESSONS[currentLessonIndex];
+      window.open(lesson.youtubeUrl, "_blank");
+    }
+
+    function selectApp(appKey) {
+      console.log("Cambiando a aplicación:", appKey);
+    }
+
+    // Controles interactivos del Overlay de siguiente lección
+    document.getElementById("btnPlayNextNow").addEventListener("click", () => {
+      clearInterval(countdownTimer);
+      document.getElementById("nextVideoOverlay").classList.add("hidden");
+      nextVideo();
+    });
+
+    document.getElementById("btnReplayCurrent").addEventListener("click", () => {
+      clearInterval(countdownTimer);
+      document.getElementById("nextVideoOverlay").classList.add("hidden");
+      selectLesson(currentLessonIndex);
+    });
+
+    document.getElementById("btnCancelNext").addEventListener("click", () => {
+      clearInterval(countdownTimer);
+      document.getElementById("nextVideoOverlay").classList.add("hidden");
+    });
+
+    // Controles Anterior / Siguiente en la barra de lección
+    document.getElementById("btnPrevLesson").addEventListener("click", prevVideo);
+    document.getElementById("btnNextLesson").addEventListener("click", nextVideo);
+
+    // Búsqueda en tiempo real
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      renderLessons(e.target.value);
+    });
+
+    // Inicializar primera lección
+    selectLesson(0);
+  </script>
+</body>
+</html>

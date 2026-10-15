@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="240" viewBox="0 0 1180 240">
+  <defs>
+    <radialGradient id="ambGlow_sistemas" cx="18%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#00F5FF" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#0072FF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="brandGrad_sistemas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="100%" stop-color="#0072FF"/>
+    </linearGradient>
+    <filter id="neonFilter_sistemas" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1180" height="240" rx="16" fill="#09090B"/>
+  <rect width="1180" height="240" rx="16" fill="url(#ambGlow_sistemas)"/>
+  <rect width="1178" height="238" x="1" y="1" rx="15" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5"/>
+
+  <!-- ISOTIPO BIVAD (VIBRANTE Y ROBUSTO) -->
+  <g transform="translate(55, 42)">
+    <!-- Resplandor posterior -->
+    <g filter="url(#neonFilter_sistemas)" opacity="0.45">
+      <rect x="15" y="8" width="18" height="144" rx="4" fill="#00F5FF"/>
+      <path d="M 36 8 L 84 8 C 110 8 128 24 128 44 C 128 64 110 76 84 78 L 36 78 Z" fill="#00F5FF"/>
+      <path d="M 36 82 L 88 82 C 115 82 132 98 132 120 C 132 142 112 152 84 152 L 36 152 Z" fill="#0072FF"/>
+    </g>
+
+    <!-- Columna Principal -->
+    <rect x="15" y="8" width="18" height="144" rx="4" fill="#00F5FF"/>
+
+    <!-- Lóbulo Superior B -->
+    <path d="M 36 8 L 84 8 C 110 8 128 24 128 44 C 128 64 110 76 84 78 L 36 78 Z" fill="#00F5FF"/>
+    <path d="M 36 24 L 78 24 C 92 24 104 33 104 44 C 104 55 92 62 78 62 L 36 62 Z" fill="#09090B"/>
+
+    <!-- Lóbulo Inferior B -->
+    <path d="M 36 82 L 88 82 C 115 82 132 98 132 120 C 132 142 112 152 84 152 L 36 152 Z" fill="#0072FF"/>
+    <path d="M 36 98 L 80 98 C 94 98 108 106 108 120 C 108 132 94 136 80 136 L 36 136 Z" fill="#09090B"/>
+
+    <!-- Chevrons Direccionales de Aceleración -->
+    <path d="M 145 46 L 163 70 L 145 94 L 157 94 L 175 70 L 157 46 Z" fill="#00F5FF"/>
+    <path d="M 166 46 L 184 70 L 166 94 L 178 94 L 196 70 L 178 46 Z" fill="#0072FF" opacity="0.85"/>
+  </g>
+
+  <!-- TIPOGRAFÍA RESPONSIVA CON TSPAN (AMPLIO ESPACIO, CERO RECORTE) -->
+  <g transform="translate(300, 124)">
+    <text font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="62" font-weight="900" letter-spacing="3">
+      <tspan fill="#FFFFFF">BIVAD </tspan>
+      <tspan fill="#00F5FF" font-weight="800"> SISTEMAS</tspan>
+    </text>
+  </g>
+  <g transform="translate(305, 168)">
+    <text font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" letter-spacing="6" fill="#71717A">
+      ENTERPRISE SOFTWARE & AI
+    </text>
+  </g>
+</svg>
