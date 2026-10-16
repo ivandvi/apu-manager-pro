@@ -148,7 +148,7 @@
           </span>
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            100% operativo sin internet tras activación
+            Funciona sin internet tras la activación
           </span>
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -221,8 +221,8 @@
         <p class="text-xs sm:text-sm text-gray-400 mt-1">Precargadas para mayor agilidad</p>
       </div>
       <div>
-        <p class="text-2xl sm:text-3xl font-bold text-white">70%</p>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Ahorro de tiempo frente a hojas de cálculo</p>
+        <p class="text-2xl sm:text-3xl font-bold text-white">AIU + IVA</p>
+        <p class="text-xs sm:text-sm text-gray-400 mt-1">Calculados automáticamente en cada presupuesto</p>
       </div>
       <div>
         <p class="text-2xl sm:text-3xl font-bold text-swift-cyan">100% Local</p>
@@ -393,8 +393,8 @@
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs text-gray-400">
             <div><strong class="text-gray-200">Sistema Operativo:</strong> Windows 10 / 11 (64-bit)</div>
-            <div><strong class="text-gray-200">Requisitos Mínimos:</strong> 4 GB RAM · 250 MB en disco</div>
-            <div><strong class="text-gray-200">Conectividad:</strong> 100% Offline tras activación</div>
+            <div><strong class="text-gray-200">Espacio requerido:</strong> aprox. 550 MB en disco</div>
+            <div><strong class="text-gray-200">Conectividad:</strong> funciona sin internet tras la activación</div>
             <div><strong class="text-gray-200">Archivo:</strong> <code class="text-cyan-300">APU_Manager_PRO_Setup_v2.4.0.exe</code></div>
           </div>
         </div>
@@ -405,7 +405,7 @@
             <span>Descargar Instalador (.EXE)</span>
           </a>
           <button type="button" id="btn-ver-sha256" class="text-xs text-swift-cyan hover:underline text-center">
-            Verificar huella SHA-256 y reporte VirusTotal
+            Verificar huella SHA-256
           </button>
         </div>
       </div>
@@ -554,8 +554,8 @@
             <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
             </svg>
-            <span class="text-xs text-gray-300">Software 100% libre de virus y cifrado TLS/SHA-256.</span>
-            <button type="button" id="link-virustotal" class="text-xs text-swift-cyan hover:underline transition font-medium">(Ver reporte de VirusTotal)</button>
+            <span class="text-xs text-gray-300">Instalador con huella SHA-256 verificable.</span>
+            <button type="button" id="link-virustotal" class="text-xs text-swift-cyan hover:underline transition font-medium">(Verificar huella SHA-256)</button>
           </div>
         </form>
       </div>
@@ -576,7 +576,7 @@
             </span>
           </summary>
           <div class="text-gray-300 text-sm sm:text-base px-5 sm:px-6 pb-6 leading-relaxed">
-            Sí. APU Manager PRO cuenta con optimización nativa para arquitecturas Windows 10 y Windows 11 (64 bits). Su motor de base de datos local es ligero (requiere apenas 4 GB de RAM y 250 MB de espacio en disco) y funciona sin conexión a internet una vez activada tu licencia.
+            Sí. APU Manager PRO cuenta con optimización nativa para arquitecturas Windows 10 y Windows 11 (64 bits). Su motor de base de datos local es ligero (ocupa aproximadamente 550 MB en disco) y funciona sin conexión a internet una vez activada tu licencia.
           </div>
         </details>
 
@@ -871,14 +871,13 @@
 
     // Reporte de VirusTotal y Huella SHA-256
     function mostrarModalVirusTotal() {
-      abrirModal('Certificado de Integridad SHA-256 y VirusTotal', `
+      abrirModal('Verificación de integridad SHA-256', `
         <p>El instalador oficial de <strong>APU Manager PRO v2.4.0 (x64)</strong> es compilado y verificado por <strong>Bivad Sistemas</strong> antes de cada publicación:</p>
         <div class="bg-gray-950 border border-gray-800 rounded-lg p-3 font-mono text-xs space-y-1.5 text-gray-300">
           <div><span class="text-gray-500">Archivo:</span> APU_Manager_PRO_Setup_v2.4.0.exe</div>
-          <div><span class="text-gray-500">Detecciones:</span> <span class="text-emerald-400 font-bold">0 / 72 motores antivirus (Limpio)</span></div>
-          <div class="break-all"><span class="text-gray-500">SHA-256:</span> <span class="text-swift-cyan">8f4e2b91c0d77a3f5e12b6984d2109c7e5a3b4f1029384756a1b2c3d4e5f6a7b</span></div>
+                    <div class="break-all"><span class="text-gray-500">SHA-256:</span> <span class="text-swift-cyan">9FC1D1F1EC077C5F4758931E2C8B113774C12A3BDAE943DC53542BD9972F7399</span></div>
         </div>
-        <p class="pt-2">Puedes auditar los paquetes en tiempo real en el analizador oficial de <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="text-swift-cyan underline font-semibold">VirusTotal.com</a>.</p>
+        <p class="pt-2">Compara la huella del archivo descargado con la publicada, o analízalo tú mismo en <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer" class="text-swift-cyan underline font-semibold">VirusTotal.com</a>.</p>
       `);
     }
 
@@ -1149,7 +1148,7 @@
       "name": "¿Es compatible con mi equipo de trabajo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. APU Manager PRO está optimizado para Windows 10 y Windows 11 (64 bits), requiere mínimo 4 GB de RAM y 250 MB de disco, y funciona 100% sin internet tras su activación."
+        "text": "Sí. APU Manager PRO está optimizado para Windows 10 y Windows 11 (64 bits), ocupa aproximadamente 550 MB de disco y funciona sin internet tras su activación."
       }
     },
     {
