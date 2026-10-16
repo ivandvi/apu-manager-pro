@@ -540,9 +540,7 @@
 
           <!-- Panel de Botón PayPal (USD) -->
           <div id="panel-pago-paypal" class="hidden pt-2 space-y-2">
-            <button id="btn-compra-paypal" type="button" class="w-full bg-[#FFC439] hover:bg-[#f4b829] text-slate-950 font-bold py-3.5 px-6 rounded-full transition duration-300 text-base sm:text-lg shadow-lg flex items-center justify-center gap-2">
-              <span>Pagar $31.14 USD con PayPal / Tarjeta Internacional</span>
-            </button>
+            <div id="paypal-button-container" class="min-h-[48px]"></div>
             <p class="text-[11px] text-gray-400 text-center">
               Procesado en dólares estadounidenses (<strong>$31.14 USD</strong>, equivalente a $99.000 COP) mediante <strong>PayPal Orders API v2</strong>.
             </p>
@@ -956,10 +954,7 @@
     // 2. La clave de licencia la aprovisiona exclusivamente el backend cuando
     //    recibe y verifica el Webhook firmado de Wompi (X-Event-Checksum) o la
     //    captura COMPLETED en PayPal Orders API v2.
-    const BACKEND_API_BASE = 'https://api.bivadsistemas.com';
-    const WOMPI_PUBLIC_KEY = 'pub_prod_BivadSistemasKeyReemplazarEnProd';
-    const MONTO_WOMPI_CENTAVOS = 9900000; // $99.000 COP expresados en centavos
-    const MONTO_PAYPAL_USD = '31.14';     // Equivalente a $99.000 COP en USD
+    const BACKEND_API_BASE = 'https://apu-manager-api-9f3k2x.azurewebsites.net';
 
     const form = document.getElementById('form-compra');
     const inputNombre = document.getElementById('nombre-comprador');
@@ -970,7 +965,6 @@
     const checkDatos = document.getElementById('acepto-datos');
     const checkTerminos = document.getElementById('acepto-terminos');
     const btnCompra = document.getElementById('btn-compra');
-    const btnCompraPaypal = document.getElementById('btn-compra-paypal');
 
     function validarFormularioCompra() {
       const nombre = inputNombre.value.trim();
@@ -1000,15 +994,6 @@
       };
     }
 
-    // Cálculo auxiliar SHA-256 para demostración de la firma de integridad Wompi
-    async function calcularHashSHA256(cadena) {
-      const buffer = new TextEncoder().encode(cadena);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-      return Array.from(new Uint8Array(hashBuffer))
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join('');
-    }
-
     // Flujo 1: Pago Nacional en COP con Wompi (PSE / Nequi / Tarjetas)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1020,117 +1005,95 @@
       btnCompra.disabled = true;
       divMensaje.textContent = '';
 
-      const referenciaUnica = 'APU-WOMPI-' + Date.now();
-
       try {
-        // 1. Solicitar la firma de integridad SHA-256 al backend de Bivad Sistemas
-        const wompiUrl = `${BACKEND_API_BASE}/api/v1/pagos/wompi/firmar-orden`;
-        const response = await fetch(wompiUrl, {
+        const response = await fetch(`${BACKEND_API_BASE}/checkout/wompi`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            reference: referenciaUnica,
-            amountInCents: MONTO_WOMPI_CENTAVOS,
-            currency: 'COP',
-            customer: comprador
-          })
+          body: JSON.stringify({ email: comprador.email })
         });
-
-        if (response.ok) {
-          const ordenFirmada = await response.json();
-          if (typeof window.WidgetCheckout === 'function') {
-            const checkout = new window.WidgetCheckout({
-              currency: 'COP',
-              amountInCents: MONTO_WOMPI_CENTAVOS,
-              reference: ordenFirmada.reference,
-              publicKey: ordenFirmada.publicKey || WOMPI_PUBLIC_KEY,
-              signature: { integrity: ordenFirmada.integritySignature },
-              redirectUrl: 'https://apumanager.bivadsistemas.com/confirmacion',
-              customerData: {
-                email: comprador.email,
-                fullName: comprador.fullName,
-                phoneNumber: comprador.phoneNumber.replace(/\D/g, '') || '3000000000',
-                phoneNumberPrefix: '+57',
-                legalId: comprador.legalId,
-                legalIdType: comprador.legalIdType
-              }
-            });
-            checkout.open((result) => {
-              const tx = result.transaction;
-              divMensaje.className = 'text-sm text-center mt-2 font-medium text-emerald-400';
-              divMensaje.textContent = `Transacción Wompi #${tx.id} (${tx.status}). Al confirmarse el webhook en el servidor, enviaremos tu licencia a ${comprador.email}.`;
-            });
+        if (!response.ok) throw new Error('checkout');
+        const orden = await response.json();
+        if (typeof window.WidgetCheckout !== 'function') throw new Error('widget');
+        const checkout = new window.WidgetCheckout({
+          currency: orden.currency,
+          amountInCents: orden.amount_in_cents,
+          reference: orden.reference,
+          publicKey: orden.public_key,
+          signature: { integrity: orden.integrity_signature },
+          redirectUrl: 'https://bivadsistemas.tech/?pago=wompi',
+          customerData: {
+            email: comprador.email,
+            fullName: comprador.fullName,
+            phoneNumber: comprador.phoneNumber.replace(/\D/g, '') || '3000000000',
+            phoneNumberPrefix: '+57',
+            legalId: comprador.legalId,
+            legalIdType: comprador.legalIdType
           }
-        } else {
-          throw new Error('Backend en modo previsualización');
-        }
+        });
+        checkout.open((result) => {
+          const tx = result.transaction;
+          divMensaje.className = 'text-sm text-center mt-2 font-medium text-emerald-400';
+          divMensaje.textContent = tx.status === 'APPROVED'
+            ? `Pago aprobado. Enviaremos tu licencia a ${comprador.email} en unos instantes.`
+            : `Transacción ${tx.status}. Si el pago se aprueba, recibirás tu licencia en ${comprador.email}.`;
+        });
       } catch (err) {
-        // Modo demostración verificable cuando se previsualiza sin el servidor backend activo
-        const firmaDemo = await calcularHashSHA256(
-          `${referenciaUnica}${MONTO_WOMPI_CENTAVOS}COPtest_integrity_secret_bivad`
-        );
-        divMensaje.className = 'text-xs sm:text-sm text-left mt-3 p-3.5 rounded-lg bg-cyan-950/70 border border-cyan-500/40 text-cyan-100 space-y-1';
-        divMensaje.innerHTML = `
-          <p class="font-bold text-swift-cyan">✓ Orden Wompi preparada correctamente (Modo Previsualización)</p>
-          <p><strong>Referencia:</strong> <code class="font-mono">${referenciaUnica}</code> · <strong>Monto:</strong> <code>9900000</code> centavos ($99.000 COP)</p>
-          <p class="break-all"><strong>Firma SHA-256 (signature:integrity):</strong> <code class="font-mono text-[11px]">${firmaDemo}</code></p>
-          <p><strong>Comprador:</strong> ${comprador.fullName} (${comprador.legalIdType} ${comprador.legalId}) · <strong>Entrega:</strong> ${comprador.email}</p>
-          <p class="text-[11px] text-gray-300 pt-1">Conecta el endpoint <code>POST /api/v1/pagos/wompi/firmar-orden</code> y el webhook <code>POST /api/v1/webhooks/wompi</code> en tu servidor para procesar pagos en vivo.</p>
-        `;
+        divMensaje.className = 'text-sm text-center mt-2 font-medium text-red-400';
+        divMensaje.textContent = 'No pudimos iniciar el pago. Inténtalo de nuevo o escríbenos a contacto@bivadsistemas.com.';
       } finally {
         btnCompra.innerText = textoOriginal;
         btnCompra.disabled = false;
       }
     });
 
-    // Flujo 2: Pago Internacional en USD con PayPal (Orders API v2)
-    btnCompraPaypal.addEventListener('click', async () => {
-      const comprador = validarFormularioCompra();
-      if (!comprador) return;
-
-      const textoOriginal = btnCompraPaypal.innerText;
-      btnCompraPaypal.innerText = 'Iniciando orden en PayPal ($31.14 USD)...';
-      btnCompraPaypal.disabled = true;
-      divMensaje.textContent = '';
-
-      const referenciaPaypal = 'APU-PAYPAL-' + Date.now();
-
+    // Flujo 2: Pago Internacional en USD con PayPal (botones oficiales del SDK)
+    (async () => {
+      const contenedor = document.getElementById('paypal-button-container');
       try {
-        const paypalUrl = `${BACKEND_API_BASE}/api/v1/pagos/paypal/create-order`;
-        const response = await fetch(paypalUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            reference: referenciaPaypal,
-            currencyCode: 'USD',
-            value: MONTO_PAYPAL_USD,
-            customer: comprador
-          })
+        const cfg = await (await fetch(`${BACKEND_API_BASE}/public-config`)).json();
+        if (!cfg.paypal_client_id) throw new Error('config');
+        await new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(cfg.paypal_client_id)}&currency=USD&intent=capture`;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.approveUrl) {
-            window.open(data.approveUrl, '_blank', 'noopener,noreferrer');
+        paypal.Buttons({
+          style: { layout: 'vertical', shape: 'pill', label: 'pay' },
+          onClick: (data, actions) => (validarFormularioCompra() ? actions.resolve() : actions.reject()),
+          createOrder: async () => {
+            const comprador = validarFormularioCompra();
+            const r = await fetch(`${BACKEND_API_BASE}/checkout/paypal`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: comprador.email })
+            });
+            if (!r.ok) throw new Error('create');
+            return (await r.json()).order_id;
+          },
+          onApprove: async (data) => {
+            const r = await fetch(`${BACKEND_API_BASE}/checkout/paypal/capture`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ order_id: data.orderID })
+            });
+            divMensaje.className = r.ok
+              ? 'text-sm text-center mt-2 font-medium text-emerald-400'
+              : 'text-sm text-center mt-2 font-medium text-red-400';
+            divMensaje.textContent = r.ok
+              ? `Pago confirmado. Enviaremos tu licencia a ${inputContacto.value.trim()} en unos instantes.`
+              : 'No pudimos confirmar el pago. Escríbenos a contacto@bivadsistemas.com con tu comprobante de PayPal.';
+          },
+          onError: () => {
+            divMensaje.className = 'text-sm text-center mt-2 font-medium text-red-400';
+            divMensaje.textContent = 'No pudimos procesar el pago con PayPal. Inténtalo de nuevo.';
           }
-          divMensaje.className = 'text-sm text-center mt-2 font-medium text-emerald-400';
-          divMensaje.textContent = `Orden PayPal #${data.orderID} creada por $${MONTO_PAYPAL_USD} USD. Completa la aprobación para recibir tu licencia en ${comprador.email}.`;
-        } else {
-          throw new Error('Backend PayPal en modo previsualización');
-        }
+        }).render(contenedor);
       } catch (err) {
-        divMensaje.className = 'text-xs sm:text-sm text-left mt-3 p-3.5 rounded-lg bg-amber-950/60 border border-amber-500/40 text-amber-100 space-y-1';
-        divMensaje.innerHTML = `
-          <p class="font-bold text-amber-300">✓ Orden PayPal Orders v2 preparada (Modo Previsualización)</p>
-          <p><strong>Referencia:</strong> <code class="font-mono">${referenciaPaypal}</code> · <strong>Monto:</strong> <code>$${MONTO_PAYPAL_USD} USD</code> (Equivalente a $99.000 COP)</p>
-          <p><strong>Comprador:</strong> ${comprador.fullName} (${comprador.legalIdType} ${comprador.legalId}) · <strong>Entrega:</strong> ${comprador.email}</p>
-          <p class="text-[11px] text-gray-300 pt-1">Conecta los endpoints <code>POST /api/v1/pagos/paypal/create-order</code> y <code>POST /api/v1/pagos/paypal/capture-order</code> en tu backend para capturar el pago en USD y enviar la clave automáticamente.</p>
-        `;
-      } finally {
-        btnCompraPaypal.innerText = textoOriginal;
-        btnCompraPaypal.disabled = false;
+        contenedor.textContent = 'PayPal no está disponible en este momento.';
       }
-    });
+    })();
   });
 </script>
 
