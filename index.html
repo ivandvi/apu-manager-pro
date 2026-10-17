@@ -850,25 +850,45 @@
       });
     });
 
-    function procesarRadicadoPQRS(e) {
+    async function procesarRadicadoPQRS(e) {
       e.preventDefault();
       const tipo = document.getElementById('pqrs-tipo').value;
-      const email = document.getElementById('pqrs-email').value;
-      const ahora = new Date();
-      const fechaStr = ahora.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      const numRadicado = 'PQRS-BIVAD-' + ahora.getFullYear() + '-' + String(Math.floor(100000 + Math.random() * 900000));
+      const email = document.getElementById('pqrs-email').value.trim();
+      const detalle = document.getElementById('pqrs-detalle').value.trim();
       const contenedor = document.getElementById('pqrs-resultado');
-      contenedor.innerHTML = `
-        <div class="bg-emerald-950/60 border border-emerald-500/40 rounded-lg p-3 text-xs text-emerald-200 space-y-1">
-          <p class="font-bold text-emerald-400">✓ Solicitud registrada con éxito</p>
-          <p><strong>N.º de Radicado:</strong> <code class="text-white font-mono">${numRadicado}</code></p>
-          <p><strong>Fecha y Hora de Radicación:</strong> ${fechaStr}</p>
-          <p><strong>Tipo:</strong> ${tipo} · <strong>Titular:</strong> ${email}</p>
-          <p class="text-[11px] text-gray-300 pt-1">Conserva este número para seguimiento en <strong>contacto@bivadsistemas.com</strong>.</p>
-        </div>
-      `;
+      const boton = e.target.querySelector('button[type="submit"]');
+      const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+      const mostrarError = (msg) => {
+        contenedor.innerHTML = `<div class="bg-red-950/60 border border-red-500/40 rounded-lg p-3 text-xs text-red-200">${esc(msg)}</div>`;
+      };
+      boton.disabled = true;
+      contenedor.innerHTML = '<p class="text-xs text-gray-300">Registrando tu solicitud…</p>';
+      try {
+        const r = await fetch(`${BACKEND_API_BASE}/pqrs`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tipo, email, detalle })
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          mostrarError(typeof d.detail === 'string' ? d.detail : 'No pudimos registrar tu solicitud. Escríbenos a contacto@bivadsistemas.com.');
+          return;
+        }
+        contenedor.innerHTML = `
+          <div class="bg-emerald-950/60 border border-emerald-500/40 rounded-lg p-3 text-xs text-emerald-200 space-y-1">
+            <p class="font-bold text-emerald-400">✓ Solicitud registrada con éxito</p>
+            <p><strong>N.º de Radicado:</strong> <code class="text-white font-mono">${esc(d.radicado)}</code></p>
+            <p><strong>Fecha y Hora de Radicación:</strong> ${esc(d.fecha)}</p>
+            <p><strong>Tipo:</strong> ${esc(d.tipo)} · <strong>Titular:</strong> ${esc(email)}</p>
+            <p class="text-[11px] text-gray-300 pt-1">Te enviamos una confirmación a tu correo. Conserva este número para seguimiento.</p>
+          </div>`;
+        e.target.reset();
+      } catch (err) {
+        mostrarError('No pudimos conectar con el servidor. Escríbenos a contacto@bivadsistemas.com.');
+      } finally {
+        boton.disabled = false;
+      }
     }
-
     // Reporte de VirusTotal y Huella SHA-256
     function mostrarModalVirusTotal() {
       abrirModal('Verificación de integridad SHA-256', `
