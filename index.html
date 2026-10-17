@@ -295,11 +295,11 @@
         <article class="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/40 transition">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Módulo 01 · 4 min</span>
+              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Video 1</span>
               <span class="text-xs text-gray-400">Guía en Video</span>
             </div>
-            <h3 class="text-lg font-semibold text-white">Creación de Insumos y Cuadrillas</h3>
-            <p class="text-sm text-gray-400 mt-2">Cómo importar tu listado de materiales, configurar tarifas horarias de cuadrillas y asignar porcentajes de herramienta menor.</p>
+            <h3 class="text-lg font-semibold text-white">Primeros pasos, instalación y marca</h3>
+            <p class="text-sm text-gray-400 mt-2">Instala la aplicación en Windows, acepta la licencia y configura el logotipo y los datos de tu empresa para tus reportes.</p>
           </div>
           <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
             <button type="button" data-tutorial="1" class="btn-ver-tutorial text-xs font-semibold text-gray-300 hover:text-white inline-flex items-center gap-1">
@@ -312,15 +312,14 @@
             </a>
           </div>
         </article>
-
         <article class="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/40 transition">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Módulo 02 · 6 min</span>
+              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Video 2</span>
               <span class="text-xs text-gray-400">Guía en Video</span>
             </div>
-            <h3 class="text-lg font-semibold text-white">Estructuración del AIU e IVA</h3>
-            <p class="text-sm text-gray-400 mt-2">Ajuste de porcentajes de Administración, Imprevistos y Utilidad, con liquidación automática del IVA del 19% sobre la utilidad.</p>
+            <h3 class="text-lg font-semibold text-white">Catálogo maestro de insumos y precios</h3>
+            <p class="text-sm text-gray-400 mt-2">Administra las familias de insumos, ajusta rendimientos y cuadrillas, e importa tus listas de precios desde Excel.</p>
           </div>
           <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
             <button type="button" data-tutorial="2" class="btn-ver-tutorial text-xs font-semibold text-gray-300 hover:text-white inline-flex items-center gap-1">
@@ -333,15 +332,14 @@
             </a>
           </div>
         </article>
-
         <article class="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/40 transition">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Módulo 03 · 3 min</span>
+              <span class="inline-block text-xs font-mono bg-cyan-500/10 text-swift-cyan px-2.5 py-1 rounded">Video 3</span>
               <span class="text-xs text-gray-400">Guía en Video</span>
             </div>
-            <h3 class="text-lg font-semibold text-white">Exportación PDF Marca Blanca</h3>
-            <p class="text-sm text-gray-400 mt-2">Personalización de encabezados con el logotipo de tu firma contratista, pie de firma profesional y generación de anexos APU.</p>
+            <h3 class="text-lg font-semibold text-white">Creación de APUs y plantillas maestras</h3>
+            <p class="text-sm text-gray-400 mt-2">Crea ítems desde cero o agiliza tu trabajo con las plantillas precargadas de obra civil, redes eléctricas e hidrosanitarias.</p>
           </div>
           <div class="mt-5 pt-4 border-t border-gray-800 flex items-center justify-between">
             <button type="button" data-tutorial="3" class="btn-ver-tutorial text-xs font-semibold text-gray-300 hover:text-white inline-flex items-center gap-1">
@@ -907,54 +905,56 @@
     // Guías rápidas en la sección de Tutoriales (con enlace a tutorials/)
     const detalleTutoriales = {
       '1': {
-        titulo: 'Módulo 01: Creación de Insumos, Cuadrillas y Rendimientos',
+        titulo: 'Video 1: Primeros pasos, instalación y marca',
         html: `
-          <ol class="list-decimal pl-5 space-y-2">
-            <li>Abre <strong>APU Manager PRO</strong> y selecciona <em>Base de Datos &gt; Insumos Maestros</em>.</li>
-            <li>Importa tu listado desde CSV/Excel o parte de las plantillas APU precargadas (Obra Civil, Eléctrica, Hidrosanitaria o Telecomunicaciones).</li>
-            <li>Configura la tarifa horaria de tus cuadrillas incluyendo el factor prestacional vigente y define el porcentaje automático de <strong>Herramienta Menor</strong> (ej. 5% sobre la Mano de Obra).</li>
-          </ol>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Descarga e instalación limpia en Windows.</li>
+            <li>Aceptación del contrato de licencia (EULA).</li>
+            <li>Configuración del logotipo de tu empresa.</li>
+            <li>Datos de la empresa (NIT, contacto) que aparecen en tus reportes.</li>
+          </ul>
           <div class="mt-4 pt-3 border-t border-gray-800 flex justify-end">
             <a href="tutorials/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-swift-cyan hover:underline">
-              <span>▶ Ver clase completa en video (Academia)</span>
+              <span>▶ Ver el video completo (Academia)</span>
               <span>→</span>
             </a>
           </div>
         `
       },
       '2': {
-        titulo: 'Módulo 02: Configuración Financiera de AIU e IVA Legal',
+        titulo: 'Video 2: Catálogo maestro de insumos y precios',
         html: `
-          <ol class="list-decimal pl-5 space-y-2">
-            <li>En la pestaña <em>Parámetros Financieros del Proyecto</em>, ingresa los porcentajes de <strong>Administración (A)</strong>, <strong>Imprevistos (I)</strong> y <strong>Utilidad (U)</strong> exigidos por el pliego.</li>
-            <li>Activa la casilla <em>Liquidación de IVA sobre Utilidad (19%)</em> conforme al Estatuto Tributario colombiano para contratos de construcción.</li>
-            <li>Compara tu presupuesto actual contra la <strong>Línea Base de Costos</strong> para proteger tu margen antes de presentar la oferta.</li>
-          </ol>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Búsqueda y filtrado rápido por familia de insumo.</li>
+            <li>Ajuste de rendimientos y cuadrillas.</li>
+            <li>Importación de listas de precios desde Excel.</li>
+            <li>Exportación del catálogo para revisión.</li>
+          </ul>
           <div class="mt-4 pt-3 border-t border-gray-800 flex justify-end">
             <a href="tutorials/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-swift-cyan hover:underline">
-              <span>▶ Ver clase completa en video (Academia)</span>
+              <span>▶ Ver el video completo (Academia)</span>
               <span>→</span>
             </a>
           </div>
         `
       },
       '3': {
-        titulo: 'Módulo 03: Exportación Corporativa a PDF con Marca Blanca',
+        titulo: 'Video 3: Creación de APUs y plantillas maestras',
         html: `
-          <ol class="list-decimal pl-5 space-y-2">
-            <li>Dirígete a <em>Configuración de Empresa</em> y carga el logotipo de tu firma contratista o consultora, junto con tu NIT y matrícula profesional.</li>
-            <li>Selecciona <em>Exportar &gt; Presupuesto Maestro + Anexos APU (PDF)</em>.</li>
-            <li>El software generará el cuadro general por capítulos y las fichas individuales de cada APU listas para imprimir o adjuntar en SECOP II.</li>
-          </ol>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Creación de ítems de obra en blanco.</li>
+            <li>Cálculo de costos directos en tiempo real.</li>
+            <li>Importación desde las plantillas maestras precargadas.</li>
+            <li>Duplicación y adaptación rápida de ítems.</li>
+          </ul>
           <div class="mt-4 pt-3 border-t border-gray-800 flex justify-end">
             <a href="tutorials/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-swift-cyan hover:underline">
-              <span>▶ Ver clase completa en video (Academia)</span>
+              <span>▶ Ver el video completo (Academia)</span>
               <span>→</span>
             </a>
           </div>
         `
-      }
-    };
+      }    };
 
     document.querySelectorAll('.btn-ver-tutorial').forEach((btn) => {
       btn.addEventListener('click', () => {
