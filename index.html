@@ -1013,6 +1013,38 @@
       };
     }
 
+    // Pantalla de confirmación posterior al pago (Wompi redirige a /?pago=wompi&id=...; PayPal usa la misma ventana)
+    function mostrarResultadoPago(estado, email) {
+      const destino = email ? `<strong>${email.replace(/[&<>"']/g, '')}</strong>` : 'tu correo';
+      const vistas = {
+        APPROVED: ['✅ ¡Pago aprobado!', `<p>Gracias por tu compra de <strong>APU Manager PRO</strong>.</p><p class="mt-2">En unos instantes recibirás tu clave de licencia en ${destino}. Si no la ves en unos minutos, revisa la carpeta de spam o escríbenos a <strong>contacto@bivadsistemas.com</strong>.</p><p class="mt-2">Para activarla: instala la aplicación, ve a <em>Ayuda &gt; Activar licencia</em> y pega la clave.</p>`],
+        PENDING: ['⏳ Pago en proceso', `<p>Tu pago está siendo verificado por la entidad financiera. Cuando se apruebe, enviaremos tu licencia a ${destino}.</p><p class="mt-2">Puede tardar unos minutos. Si pasadas unas horas no la recibes, escríbenos a <strong>contacto@bivadsistemas.com</strong>.</p>`],
+        DECLINED: ['❌ Pago no aprobado', `<p>La transacción no fue aprobada y no se realizó ningún cobro. Puedes intentarlo de nuevo con otro medio de pago.</p>`],
+        ERROR: ['⚠️ No pudimos confirmar el pago', `<p>Si realizaste el pago, recibirás tu licencia en ${destino} una vez se apruebe. Si tienes dudas, escríbenos a <strong>contacto@bivadsistemas.com</strong> con tu comprobante.</p>`]
+      };
+      const [titulo, cuerpo] = vistas[estado] || vistas.ERROR;
+      abrirModal(titulo, cuerpo);
+    }
+
+    // Regreso desde Wompi: consulta el estado real de la transacción
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('pago') !== 'wompi') return;
+      const txId = params.get('id');
+      history.replaceState(null, '', window.location.pathname + '#precios');
+      let estado = 'ERROR';
+      let email = '';
+      if (txId && /^[\w-]{6,64}$/.test(txId)) {
+        try {
+          const r = await fetch(`https://production.wompi.co/v1/transactions/${encodeURIComponent(txId)}`);
+          const tx = (await r.json()).data;
+          email = (tx && tx.customer_email) || '';
+          estado = { APPROVED: 'APPROVED', PENDING: 'PENDING', DECLINED: 'DECLINED', VOIDED: 'DECLINED', ERROR: 'DECLINED' }[tx && tx.status] || 'ERROR';
+        } catch (err) { /* se muestra el mensaje genérico */ }
+      }
+      mostrarResultadoPago(estado, email);
+    })();
+
     // Flujo 1: Pago Nacional en COP con Wompi (PSE / Nequi / Tarjetas)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1051,10 +1083,8 @@
         });
         checkout.open((result) => {
           const tx = result.transaction;
-          divMensaje.className = 'text-sm text-center mt-2 font-medium text-emerald-400';
-          divMensaje.textContent = tx.status === 'APPROVED'
-            ? `Pago aprobado. Enviaremos tu licencia a ${comprador.email} en unos instantes.`
-            : `Transacción ${tx.status}. Si el pago se aprueba, recibirás tu licencia en ${comprador.email}.`;
+          divMensaje.textContent = '';
+          mostrarResultadoPago(tx.status === 'APPROVED' ? 'APPROVED' : (tx.status === 'PENDING' ? 'PENDING' : 'DECLINED'), comprador.email);
         });
       } catch (err) {
         divMensaje.className = 'text-sm text-center mt-2 font-medium text-red-400';
@@ -1097,12 +1127,8 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ order_id: data.orderID })
             });
-            divMensaje.className = r.ok
-              ? 'text-sm text-center mt-2 font-medium text-emerald-400'
-              : 'text-sm text-center mt-2 font-medium text-red-400';
-            divMensaje.textContent = r.ok
-              ? `Pago confirmado. Enviaremos tu licencia a ${inputContacto.value.trim()} en unos instantes.`
-              : 'No pudimos confirmar el pago. Escríbenos a contacto@bivadsistemas.com con tu comprobante de PayPal.';
+            divMensaje.textContent = '';
+            mostrarResultadoPago(r.ok ? 'APPROVED' : 'ERROR', inputContacto.value.trim());
           },
           onError: () => {
             divMensaje.className = 'text-sm text-center mt-2 font-medium text-red-400';
